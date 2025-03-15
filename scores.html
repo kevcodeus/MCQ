@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Scores - MCQ Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="logo">MCQ Test Platform</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="scores.html" class="active">Test Scores</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="glass-card">
+            <h1>Your Test Scores</h1>
+            <div id="scores-container">
+                <div id="loading">Loading scores...</div>
+            </div>
+            <a href="index.html" class="return-home">Return to Home</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scoresContainer = document.getElementById('scores-container');
+            
+            // Load test results from localStorage
+            const testResults = JSON.parse(localStorage.getItem('testResults') || '{}');
+            
+            if (Object.keys(testResults).length === 0) {
+                scoresContainer.innerHTML = '<p class="no-scores">You haven\'t taken any tests yet.</p>';
+                return;
+            }
+            
+            // Create table to display results
+            let tableHTML = `
+                <table class="score-table">
+                    <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Score</th>
+                            <th>Percentage</th>
+                            <th>Date Taken</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            const testNames = {
+                'test1': 'Test 1',
+                'test2': 'Test 2',
+                'test3': 'Test 3',
+                'test4': 'Test 4'
+            };
+            
+            for (const [testId, result] of Object.entries(testResults)) {
+                const dateTaken = new Date(result.date).toLocaleString();
+                const testName = testNames[testId] || testId;
+                
+                tableHTML += `
+                    <tr>
+                        <td>${testName}</td>
+                        <td>${result.score}/${result.total}</td>
+                        <td class="percentage-cell">
+                            <div class="percentage-bar" style="width: ${result.percentage}%"></div>
+                            ${result.percentage}%
+                        </td>
+                        <td>${dateTaken}</td>
+                    </tr>
+                `;
+            }
+            
+            tableHTML += `
+                    </tbody>
+                </table>
+                <button id="clear-scores" class="submit-btn" style="margin-top: 20px;">Clear All Scores</button>
+            `;
+            
+            scoresContainer.innerHTML = tableHTML;
+            
+            // Add event listener to clear scores button
+            document.getElementById('clear-scores').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all your test scores? This action cannot be undone.')) {
+                    localStorage.removeItem('testResults');
+                    scoresContainer.innerHTML = '<p class="no-scores">You haven\'t taken any tests yet.</p>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
