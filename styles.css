@@ -28,11 +28,7 @@ body {
     padding: 10px 0;
     margin-bottom: 30px;
 }
-element.style {
-    margin-top: 10px;
-    font-size: 1.2em;
-    color: rgb(0, 0, 0);
-}
+
 
 .nav-container {
     display: flex;
@@ -289,13 +285,13 @@ element.style {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.return-home {
+/* .return-home {
     display: block;
     text-align: center;
     margin-top: 20px;
     color: white;
     text-decoration: none;
-}
+} */
 
 .return-home:hover {
     text-decoration: underline;
