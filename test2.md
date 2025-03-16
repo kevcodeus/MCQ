@@ -586,45 +586,35 @@ D) Ca2+
 
 **Answer: B) Na+**
 
-**Q178: Nicotine and Carbachol are drugs that:**
-A) Inactivate Acetylcholine esterase
-B) Activate Acetylcholine receptors
-C) Block calcium channels
-D) Inhibit muscle contraction
+**Q178: Nicotine and Carbachol are drugs that Inactivate Acetylcholine esterase:**
+A) True
+B) False
 
-**Answer: B) Activate Acetylcholine receptors**
+**Answer: B) False**
 
 **Q179: Apoferritin transports iron to the liver:**
 A) True
 B) False
-C) Only in anemic conditions
-D) Only during iron overload
 
 **Answer: B) False**
 
 **Q180: Relief from hypoxia inhibits erythropoietin induced RBC production:**
 A) True
 B) False
-C) Only in chronic hypoxia
-D) Only at high altitudes
 
 **Answer: A) True**
 
-**Q181: Hematocrit is a measure of:**
-A) The amount of hemoglobin in a given volume of blood
-B) The percentage of blood volume occupied by red blood cells
-C) The percentage of white blood cells in blood
-D) The number of platelets in blood
+**Q181: Hematocrit is a measure of the amount of hemoglobin in a given volume of blood**
+A) True
+B) False
 
-**Answer: B) The percentage of blood volume occupied by red blood cells**
+**Answer: A) True**
 
-**Q182: WBCs kill bacteria, fungi and other invading pathogens by the production of:**
-A) Antibodies
-B) Complement proteins
-C) Reactive oxygen species
-D) Histamine
+**Q182: WBCs kill bacteria, fungi and other invading pathogens by the production of reactive oxygen species:**
+A) True
+B) False
 
-**Answer: C) Reactive oxygen species**
+**Answer: A) True**
 
 **Q183: Which of the following term describes the position of structures relative to the front?**
 A) Posterior

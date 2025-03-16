@@ -390,13 +390,11 @@ D) The slow efflux of Cl-
 
 **Answer: B) The slow influx of Ca2+ in the cardiac muscle**
 
-**Q250: Complement proteins bind to the surface of microbes already coated with antibodies, and release chemicals that attract phagocytes to the scene - this is known as:**
-A) Chemotaxis
-B) Opsonization
-C) Diapedesis
-D) Phagocytosis
+**Q250: Complement proteins bind to the surface of microbes already coated with antibodies, and release chemicals that attract phagocytes to the scene :**
+A) True
+B) False
 
-**Answer: A) Chemotaxis**
+**Answer: A) True**
 
 **Q251: How many costal facets does a thoracic vertebra have in total?**
 A) 2
@@ -773,3 +771,17 @@ C) Lumbar
 D) Sacral
 
 **Answer: A) Cervical**
+
+**Q301: Complement proteins bind to the surface of microbes already coated with antibodies, and release chemicals that attract phagocytes to the scene - this is known as:**
+A) Chemotaxis
+B) Opsonization
+C) Diapedesis
+D) Phagocytosis
+
+**Answer: A) Chemotaxis**
+
+**Q302: Small tunnels seen in bone are called Canaliculi:**
+A) True
+B) False
+
+**Answer: A) True**

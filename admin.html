@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Scores - MCQ Platform</title>
+    <title>Admin Dashboard - MCQ Platform</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Additional styles for better UI */
@@ -20,7 +20,7 @@
         }
 
         .score-table th {
-            background-color: #728ad8;
+            background-color: #f9f9f9;
         }
 
         .percentage-cell {
@@ -42,37 +42,22 @@
             margin-top: 20px;
         }
 
-        .return-home {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(90deg, #a777e3, #6e8efb);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        .admin-actions {
+            margin-top: 20px;
         }
 
-        .return-home:hover {
-            background-color: #45a049;
-        }
-
-        .clear-scores-btn {
+        .admin-actions button {
             padding: 10px 20px;
-            background: linear-gradient(90deg, #ff0000, #e25d5d);
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 14px;
+            border-radius: 5px;
             cursor: pointer;
+            margin-right: 10px;
         }
 
-        .clear-scores-btn:hover {
-            background: linear-gradient(90deg, #a777e3, #6e8efb);
-        }
-
-        /* Flexbox container for buttons */
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+        .admin-actions button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -82,21 +67,21 @@
             <div class="logo">MCQ Test Platform</div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="scores.html" class="active">Test Scores</a></li>
+                <li><a href="scores.html">Test Scores</a></li>
+                <li><a href="admin.html" class="active">Admin Dashboard</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
         <div class="glass-card">
-            <h1>Your Test Scores</h1>
+            <h1>Admin Dashboard</h1>
             <div id="scores-container">
                 <div id="loading">Loading scores...</div>
             </div>
-            <!-- Flexbox container for buttons -->
-            <div class="button-container">
-                <a href="index.html" class="return-home">Return to Home</a>
-                <button id="clear-scores" class="clear-scores-btn">Clear All Score</button>
+            <div class="admin-actions">
+                <button id="export-scores">Export Scores as CSV</button>
+                <button id="clear-scores">Clear All Scores</button>
             </div>
         </div>
     </div>
@@ -109,7 +94,7 @@
             const testResults = JSON.parse(localStorage.getItem('testResults') || '{}');
             
             if (Object.keys(testResults).length === 0) {
-                scoresContainer.innerHTML = '<p class="no-scores">You haven\'t taken any tests yet.</p>';
+                scoresContainer.innerHTML = '<p class="no-scores">No test scores found.</p>';
                 return;
             }
             
@@ -158,12 +143,29 @@
             
             scoresContainer.innerHTML = tableHTML;
             
-            // Clear user scores
+            // Export scores as CSV
+            document.getElementById('export-scores').addEventListener('click', function() {
+                const csvContent = "data:text/csv;charset=utf-8," +
+                    "Test Name,Score,Percentage,Date Taken\n" +
+                    Object.entries(testResults).map(([testId, result]) => {
+                        const testName = testNames[testId] || testId;
+                        return `${testName},${result.score}/${result.total},${result.percentage}%,${new Date(result.date).toLocaleString()}`;
+                    }).join("\n");
+                
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "test_scores.csv");
+                document.body.appendChild(link);
+                link.click();
+            });
+            
+            // Clear all scores
             document.getElementById('clear-scores').addEventListener('click', function() {
-              
+                if (confirm('Are you sure you want to clear all test scores? This action cannot be undone.')) {
                     localStorage.removeItem('testResults');
-                    scoresContainer.innerHTML = '<p class="no-scores">You haven\'t taken any tests yet.</p>';
-               
+                    scoresContainer.innerHTML = '<p class="no-scores">No test scores found.</p>';
+                }
             });
         });
     </script>

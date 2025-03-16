@@ -412,10 +412,9 @@ D) Nuclear pore
 A) Nucleus
 B) Rough endoplasmic reticulum
 C) Smooth endoplasmic reticulum
-D) Mitochondria
-E) Golgi apparatus
+D) Golgi apparatus
 
-**Answer: E) Golgi apparatus**
+**Answer: D) Golgi apparatus**
 
 **Q121: Gene transcription occurs in which of the following?**
 A) Mitochondria
@@ -1147,10 +1146,9 @@ D) Nucleophilic, electrophilic
 A) Active transport
 B) Secondary active transport
 C) Facilitated diffusion
-D) Pinocytosis
-E) Simple diffusion through protein channels
+D) Simple diffusion through protein channels
 
-**Answer: E) Simple diffusion through protein channels**
+**Answer: D) Simple diffusion through protein channels**
 
 **Q216: In medical imaging, which technique is primarily used to visualize soft tissue structures, including muscles of the back, without ionizing radiation?**
 A) X-ray
@@ -1338,13 +1336,11 @@ D) Partially true - it's responsible for medial rotation only
 
 **Answer: B) False**
 
-**Q240: The tensor fasciae latae muscle is responsible for:**
-A) Adducting the thigh and assisting in lateral rotation
-B) Abducting the thigh and assisting in medial rotation
-C) Abducting the thigh and assisting in lateral rotation
-D) Adducting the thigh and assisting in medial rotation
+**Q240: The tensor fasciae latae muscle is responsible for abducting the thigh and assisting in medial rotation:**
+A) True
+B) False
 
-**Answer: B) Abducting the thigh and assisting in medial rotation**
+**Answer: B) False**
 
 **Q241: The semimembranosus muscle is the most lateral of the three hamstring muscles.**
 A) True
