@@ -43,12 +43,13 @@
         }
 
         .return-home {
-            display: inline-block;
-            padding: 10px 20px;
+            
+            padding: 11px 20px ;
             background: linear-gradient(90deg, #a777e3, #6e8efb);
-            color: white;
+            color: rgb(255, 255, 255);
+            border: none;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
         .return-home:hover {
@@ -60,7 +61,7 @@
             background: linear-gradient(90deg, #ff0000, #e25d5d);
             color: white;
             border: none;
-            border-radius: 14px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
@@ -71,9 +72,11 @@
         /* Flexbox container for buttons */
         .button-container {
             display: flex;
-            justify-content: space-between;
+            justify-content:space-between;
             margin-top: 20px;
+            border: none;
         }
+        
     </style>
 </head>
 <body>
@@ -94,6 +97,7 @@
                 <div id="loading">Loading scores...</div>
             </div>
             <!-- Flexbox container for buttons -->
+           
             <div class="button-container">
                 <a href="index.html" class="return-home">Return to Home</a>
                 <button id="clear-scores" class="clear-scores-btn">Clear All Score</button>
