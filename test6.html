@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 6 - MCQ Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Theme from test1.html */
+        body {
+            background-color: #f0f2f5;
+            padding-top: 80px; /* Adjust for fixed navbar */
+        }
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(47, 131, 210, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease;
+        }
+       
+        .options div {
+            padding: 10px;
+            margin: 5px 0;
+            background: #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .options div.correct {
+            background: #4CAF50;
+            color: white;
+        }
+        .options div.wrong {
+            background: #e74c3c;
+            color: white;
+        }
+        .options div.locked {
+            pointer-events: none;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        /* Modal for Results */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .modal button {
+            margin-top: 10px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .modal button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html"> MCQ Test Platform</a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="scores.html">Test Scores</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="glass-card">
+            <h1>MCQ Test</h1>
+            <div id="questions-container"></div>
+            <button class="submit-btn" onclick="submitTest()">Submit Test</button>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="modal" id="resultModal">
+        <h2>Test Result</h2>
+        <p>Hey Nitha All Best Wishes to Your Exam.....😊</p>
+        <p id="scoreText"></p>
+        <button onclick="closeModal()">Close</button>
+    </div>
+
+    <script>
+        let questions = [];
+        
+        fetch('test6.md')
+            .then(response => response.text())
+            .then(markdownText => {
+                parseQuestions(markdownText);
+                displayQuestions();
+            })
+            .catch(error => console.error('Error loading questions:', error));
+
+        function parseQuestions(markdownText) {
+            const questionBlocks = markdownText.match(/\*\*Q\d+:.*?(?=\*\*Q\d+:|$)/gs) || [];
+            
+            questions = questionBlocks.map(block => {
+                const lines = block.split('\n');
+                const questionText = lines[0].replace(/\*\*Q\d+:\s*/, '').trim();
+                const options = lines.filter(line => /^[A-D]\)/.test(line)).map(opt => opt.trim());
+                const correctAnswerMatch = block.match(/\*\*Answer:\s*([A-D])\)/);
+                const correctAnswer = correctAnswerMatch ? correctAnswerMatch[1] : null;
+
+                return { text: questionText, options: options, correctAnswer: correctAnswer, selected: null };
+            });
+        }
+
+        function displayQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                let html = `
+                    <div class="glass-card" id="q${index}">
+                        <h3>Question ${index + 1}</h3>
+                        <p>${q.text}</p>
+                        <div class="options">
+                `;
+                
+                q.options.forEach(option => {
+                    const optionLetter = option.charAt(0);
+                    html += `<div onclick="selectAnswer(${index}, '${optionLetter}')" id="q${index}_${optionLetter}">${option}</div>`;
+                });
+
+                html += `</div></div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function selectAnswer(index, selectedOption) {
+            if (questions[index].selected !== null) return;
+
+            questions[index].selected = selectedOption;
+            const correct = questions[index].correctAnswer;
+
+            document.querySelectorAll(`#q${index} .options div`).forEach(div => {
+                div.classList.add('locked');
+                if (div.id.endsWith(correct)) {
+                    div.classList.add('correct');
+                } else if (div.id.endsWith(selectedOption)) {
+                    div.classList.add('wrong');
+                }
+            });
+        }
+
+        function submitTest() {
+            let score = 0;
+            questions.forEach(q => {
+                if (q.selected === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            const totalQuestions = questions.length;
+            const scoreText = `You scored ${score} out of ${totalQuestions}!`;
+
+            document.getElementById('scoreText').innerText = scoreText;
+            document.getElementById('resultModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
